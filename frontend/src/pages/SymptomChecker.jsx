@@ -1,91 +1,87 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import Select from "react-select";
+import { Toaster, toast } from "react-hot-toast";
 
-const symptomsList = [
-    "Fever", "Cough", "Headache", "Fatigue", "Sore Throat", "Shortness of Breath",
-    "Body Aches", "Nausea", "Vomiting", "Diarrhea", "Loss of Taste", "Loss of Smell"
+const SYMPTOM_OPTIONS = [
+  { value: "fever", label: "Fever" },
+  { value: "cough", label: "Cough" },
+  { value: "fatigue", label: "Fatigue" },
+  { value: "headache", label: "Headache" },
+  { value: "nausea", label: "Nausea" },
+  { value: "chest_pain", label: "Chest Pain" },
+  { value: "shortness_of_breath", label: "Shortness of Breath" },
+  { value: "sore_throat", label: "Sore Throat" },
+  { value: "loss_of_taste", label: "Loss of Taste" },
+  { value: "loss_of_smell", label: "Loss of Smell" },
+  { value: "body_ache", label: "Body Ache" },
+  { value: "runny_nose", label: "Runny Nose" },
+  { value: "vomiting", label: "Vomiting" },
+  { value: "diarrhea", label: "Diarrhea" },
+  { value: "dizziness", label: "Dizziness" },
+  { value: "skin_rash", label: "Skin Rash" },
 ];
 
 const SymptomChecker = () => {
-    const [selectedSymptoms, setSelectedSymptoms] = useState([]);
-    const [result, setResult] = useState(null);
-    const [loading, setLoading] = useState(false);
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
 
-    const handleSymptomChange = (e) => {
-        const value = e.target.value;
-        if (!selectedSymptoms.includes(value)) {
-            setSelectedSymptoms([...selectedSymptoms, value]);
-        }
-    };
+  const handleSymptomChange = (selectedOptions) => {
+    setSelectedSymptoms(selectedOptions.map((option) => option.value));
+  };
 
-    const removeSymptom = (symptom) => {
-        setSelectedSymptoms(selectedSymptoms.filter(s => s !== symptom));
-    };
+  const handlePredict = async () => {
+    if (selectedSymptoms.length === 0) {
+      toast.error("Please select at least one symptom!");
+      return;
+    }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (selectedSymptoms.length === 0) {
-            alert("Please select at least one symptom.");
-            return;
-        }
-        
-        setLoading(true);
-        setResult(null);
+    setLoading(true);
+    try {
+      const { data } = await axios.post("http://localhost:5001/predict", {
+        symptoms: selectedSymptoms,
+      });
+      setResult(data.predicted_disease);
+      toast.success("Prediction successful!");
+    } catch (error) {
+      toast.error("Error fetching results.");
+    }
+    setLoading(false);
+  };
 
-        try {
-            // Convert symptoms to lowercase for consistency with backend
-            const formattedSymptoms = selectedSymptoms.map(symptom => symptom.toLowerCase());
+  return (
+    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+      <Toaster />
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-4">🔍 AI Symptom Checker</h2>
+        <p className="text-gray-600 text-center mb-4">Select your symptoms and get a prediction</p>
 
-            const response = await axios.post("http://127.0.0.1:5001/predict", { // Updated API URL
-                symptoms: formattedSymptoms
-            });
+        {/* Dropdown for symptom selection */}
+        <Select
+          options={SYMPTOM_OPTIONS}
+          isMulti
+          onChange={handleSymptomChange}
+          className="mb-4"
+          placeholder="Select symptoms..."
+        />
 
-            setResult(response.data.predicted_disease); // Updated key to match backend response
-        } catch (error) {
-            console.error("Error:", error.response ? error.response.data : error.message);
-            setResult("Error analyzing symptoms. Please try again.");
-        }
-        setLoading(false);
-    };
+        <button
+          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          onClick={handlePredict}
+          disabled={loading}
+        >
+          {loading ? "Checking..." : "Check Disease"}
+        </button>
 
-    return (
-        <div style={{ maxWidth: "600px", margin: "auto", textAlign: "center", padding: "20px" }}>
-            <h2>AI-Powered Symptom Checker</h2>
-            
-            <select onChange={handleSymptomChange} defaultValue="">
-                <option value="" disabled>Select a symptom</option>
-                {symptomsList.map((symptom, index) => (
-                    <option key={index} value={symptom.toLowerCase()}>{symptom}</option>
-                ))}
-            </select>
-
-            <div>
-                {selectedSymptoms.map((symptom, index) => (
-                    <span key={index} style={{ 
-                        display: "inline-block", 
-                        margin: "5px", 
-                        padding: "5px 10px", 
-                        backgroundColor: "#ddd", 
-                        borderRadius: "5px", 
-                        cursor: "pointer" 
-                    }}
-                    onClick={() => removeSymptom(symptom)}
-                    >
-                        {symptom} ❌
-                    </span>
-                ))}
-            </div>
-
-            <br />
-            <button onClick={handleSubmit} disabled={loading}>
-                {loading ? "Checking..." : "Check Symptoms"}
-            </button>
-
-            {result && <h3>Prediction: {result}</h3>}
-        </div>
-    );
+        {result && (
+          <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-800 rounded-lg text-center">
+            <strong>Diagnosis:</strong> {result}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
-
-
 
 export default SymptomChecker;
