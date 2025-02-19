@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import { Toaster, toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const SYMPTOM_OPTIONS = [
   { value: "fever", label: "Fever" },
@@ -51,35 +52,45 @@ const SymptomChecker = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 p-4">
       <Toaster />
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-4">🔍 AI Symptom Checker</h2>
-        <p className="text-gray-600 text-center mb-4">Select your symptoms and get a prediction</p>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white shadow-xl rounded-2xl p-6 w-full max-w-md text-center"
+      >
+        <h2 className="text-3xl font-bold text-blue-700 mb-4">🔍 AI Symptom Checker</h2>
+        <p className="text-gray-600 mb-4">Select your symptoms and get a prediction</p>
 
         {/* Dropdown for symptom selection */}
         <Select
           options={SYMPTOM_OPTIONS}
           isMulti
           onChange={handleSymptomChange}
-          className="mb-4"
+          className="mb-4 text-black"
           placeholder="Select symptoms..."
         />
 
         <button
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 disabled:bg-gray-400"
           onClick={handlePredict}
           disabled={loading}
         >
-          {loading ? "Checking..." : "Check Disease"}
+          {loading ? <span className="animate-spin">🔄</span> : "Check Disease"}
         </button>
 
         {result && (
-          <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-800 rounded-lg text-center">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mt-4 p-4 bg-green-100 border border-green-400 text-green-800 rounded-lg"
+          >
             <strong>Diagnosis:</strong> {result}
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
