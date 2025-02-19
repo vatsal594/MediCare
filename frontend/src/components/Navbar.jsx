@@ -6,7 +6,6 @@ import { AppContext } from '../context/AppContext'
 const Navbar = () => {
 
   const navigate = useNavigate()
-
   const [showMenu, setShowMenu] = useState(false)
   const { token, setToken, userData } = useContext(AppContext)
 
@@ -22,23 +21,23 @@ const Navbar = () => {
       <ul className='md:flex items-start gap-5 font-medium hidden'>
         <NavLink to='/' >
           <li className='py-1'>HOME</li>
-          <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/doctors' >
           <li className='py-1'>ALL DOCTORS</li>
-          <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/about' >
           <li className='py-1'>ABOUT</li>
-          <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/contact' >
           <li className='py-1'>CONTACT</li>
-          <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
+        </NavLink>
+        {/* ✅ Added Symptom Checker Link */}
+        <NavLink to='/symptom-checker' >
+          <li className='py-1 text-red-500 font-semibold'>SYMPTOM CHECKER</li>
         </NavLink>
       </ul>
 
-      <div className='flex items-center gap-4 '>
+      <div className='flex items-center gap-4'>
         {
           token && userData
             ? <div className='flex items-center gap-2 cursor-pointer group relative'>
@@ -67,6 +66,10 @@ const Navbar = () => {
             <NavLink onClick={() => setShowMenu(false)} to='/doctors' ><p className='px-4 py-2 rounded full inline-block'>ALL DOCTORS</p></NavLink>
             <NavLink onClick={() => setShowMenu(false)} to='/about' ><p className='px-4 py-2 rounded full inline-block'>ABOUT</p></NavLink>
             <NavLink onClick={() => setShowMenu(false)} to='/contact' ><p className='px-4 py-2 rounded full inline-block'>CONTACT</p></NavLink>
+            {/* ✅ Added Symptom Checker in Mobile Menu */}
+            <NavLink onClick={() => setShowMenu(false)} to='/symptom-checker' >
+              <p className='px-4 py-2 rounded-full inline-block text-red-500 font-semibold'>SYMPTOM CHECKER</p>
+            </NavLink>
           </ul>
         </div>
       </div>
