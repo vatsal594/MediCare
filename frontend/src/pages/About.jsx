@@ -3,41 +3,59 @@ import { assets } from '../assets/assets'
 
 const About = () => {
   return (
-    <div>
+    <div className="px-4 sm:px-8 md:px-16">
 
-      <div className='text-center text-2xl pt-10 text-[#707070]'>
-        <p>ABOUT <span className='text-gray-700 font-semibold'>US</span></p>
+      {/* Hero Section */}
+      <div className="text-center text-2xl sm:text-3xl pt-10 text-[#707070]">
+        <p>ABOUT <span className="text-primary font-semibold">US</span></p>
+        <p className="mt-2 text-lg sm:text-xl text-gray-500">Your trusted healthcare partner for a seamless experience.</p>
       </div>
 
-      <div className='my-10 flex flex-col md:flex-row gap-12'>
-        <img className='w-full md:max-w-[360px]' src={assets.about_image} alt="MediCare - Healthcare Technology" />
-        <div className='flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600'>
-          <p>Welcome to MediCare, your trusted partner in managing your healthcare needs conveniently and efficiently. At MediCare, we understand the challenges individuals face when it comes to scheduling doctor appointments and managing their health records.</p>
-          <p>MediCare is committed to excellence in healthcare technology. We continuously strive to enhance our platform, integrating the latest advancements to improve user experience and deliver superior service. Whether you're booking your first appointment or managing ongoing care, MediCare is here to support you every step of the way.</p>
-          <b className='text-gray-800'>Our Vision</b>
-          <p>Our vision at MediCare is to create a seamless healthcare experience for every user. We aim to bridge the gap between patients and healthcare providers, making it easier for you to access the care you need, when you need it.</p>
+      {/* About Section */}
+      <div className="my-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
+        <img
+          className="w-full md:max-w-[300px] rounded-lg shadow-lg transition-all duration-500 transform hover:scale-105"
+          src={assets.about_image}
+          alt="MediCare - Healthcare Technology"
+        />
+        <div className="flex flex-col justify-center gap-4 md:w-2/4 text-sm text-gray-600">
+          <p>
+            Welcome to MediCare! We help you manage healthcare needs efficiently by simplifying doctor appointments and health records.
+          </p>
+          <p>
+            We’re committed to excellence in healthcare tech, constantly enhancing our platform for a superior user experience. Whether booking or managing care, we’re here for you.
+          </p>
+          <b className="text-gray-800 text-lg">Our Vision</b>
+          <p>
+            To bridge the gap between patients and healthcare providers, creating a seamless experience for timely access to care.
+          </p>
         </div>
       </div>
 
-      <div className='text-xl my-4'>
-        <p>WHY  <span className='text-gray-700 font-semibold'>CHOOSE US</span></p>
+      {/* Why Choose Us Section */}
+      <div className="text-xl my-4 text-center">
+        <p>WHY <span className="text-primary font-semibold">CHOOSE US</span></p>
       </div>
 
-      <div className='flex flex-col md:flex-row mb-20'>
-        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
-          <b>EFFICIENCY:</b>
-          <p>Streamlined appointment scheduling that fits into your busy lifestyle.</p>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="border-2 border-gray-300 rounded-lg px-8 py-6 flex flex-col gap-4 text-sm hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer">
+          <b className="text-lg">EFFICIENCY:</b>
+          <p>Quick and easy appointment scheduling to fit your lifestyle.</p>
         </div>
-        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
-          <b>CONVENIENCE: </b>
-          <p>Access to a network of trusted healthcare professionals in your area.</p>
+        <div className="border-2 border-gray-300 rounded-lg px-8 py-6 flex flex-col gap-4 text-sm hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer">
+          <b className="text-lg">CONVENIENCE:</b>
+          <p>Access a network of trusted healthcare professionals nearby.</p>
         </div>
-        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
-          <b>PERSONALIZATION:</b>
-          <p >Tailored recommendations and reminders to help you stay on top of your health.</p>
+        <div className="border-2 border-gray-300 rounded-lg px-8 py-6 flex flex-col gap-4 text-sm hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer">
+          <b className="text-lg">PERSONALIZATION:</b>
+          <p>Tailored health reminders and recommendations to stay on track.</p>
         </div>
       </div>
 
+      {/* Footer Section */}
+      <div className="text-center mt-12 text-gray-600">
+        <p className="text-sm">MediCare is here to provide a seamless healthcare experience. Reach out to us for more info.</p>
+      </div>
     </div>
   )
 }
