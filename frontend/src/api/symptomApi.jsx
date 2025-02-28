@@ -3,12 +3,12 @@ export const getPrediction = async (selectedSymptoms) => {
         // Convert symptoms to lowercase for consistency with backend
         const formattedSymptoms = selectedSymptoms.map(symptom => symptom.toLowerCase());
 
-        const response = await fetch("http://127.0.0.1:5001/predict", { // Changed port to 5001
+        const response = await fetch("http://127.0.0.1:5001/predict", { // Ensure port matches backend
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ symptoms: formattedSymptoms }) // Ensure symptoms are sent correctly
+            body: JSON.stringify({ symptoms: formattedSymptoms }) // Ensure correct format
         });
 
         const data = await response.json();
@@ -17,9 +17,16 @@ export const getPrediction = async (selectedSymptoms) => {
             throw new Error(data.error || "Failed to fetch prediction.");
         }
 
-        return data.predicted_disease; // Ensure this matches the backend response key
+        // ✅ Return both disease and health tips
+        return {
+            predicted_disease: data.predicted_disease,
+            health_tips: data.health_tips || [] // Ensure an empty array if no tips exist
+        };
     } catch (error) {
-        console.error("API Error:", error.message); // Improved error logging
-        return "Error analyzing symptoms. Please try again.";
+        console.error("❌ API Error:", error.message);
+        return {
+            predicted_disease: "Error analyzing symptoms. Please try again.",
+            health_tips: []
+        };
     }
 };
