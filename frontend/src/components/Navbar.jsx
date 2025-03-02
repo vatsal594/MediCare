@@ -22,7 +22,8 @@ const Navbar = () => {
     { path: "/doctors", label: "DOCTORS" },
     { path: "/about", label: "ABOUT" },
     { path: "/contact", label: "CONTACT" },
-    { path: "/symptom-checker", label: "SYMPTOM CHECKER" }
+    { path: "/symptom-checker", label: "SYMPTOM CHECKER" },
+    { path: "/health-education", label: "HEALTH EDUCATION" } // New link added
   ];
 
   return (

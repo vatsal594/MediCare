@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Verify from "./pages/Verify";
 import SymptomChecker from "./pages/SymptomChecker"; // ✅ Added Import
 import RefundPage from "./pages/RefundPage";
+import HealthEducation from "./pages/HealthEducation"; // ✅ Import new page
+import Chatbot from "./components/Chatbot"; // ✅ Import Chatbot component
 
 const App = () => {
   return (
@@ -33,8 +35,10 @@ const App = () => {
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/verify" element={<Verify />} />
         <Route path="/symptom-checker" element={<SymptomChecker />} />
-        <Route path="/request-refund/:appointmentId" element={<RefundPage />} /> {/* Fixed this */}
+        <Route path="/request-refund/:appointmentId" element={<RefundPage />} /> {/* ✅ Fixed this */}
+        <Route path="/health-education" element={<HealthEducation />} />
       </Routes>
+      <Chatbot /> 
       <Footer />
     </div>
   );
