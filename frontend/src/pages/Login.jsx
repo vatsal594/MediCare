@@ -31,16 +31,12 @@ const Login = () => {
     setLoading(true);
 
     if (state === "Sign Up" && (name.length < 3 || !/^[A-Za-z]+$/.test(name))) {
-      toast.error(
-        "Name must be at least 3 characters and contain only letters."
-      );
+      toast.error("Name must be at least 3 characters and contain only letters.");
       setLoading(false);
       return;
     }
 
-    if (
-      !/^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$/.test(email)
-    ) {
+    if (!/^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$/.test(email)) {
       toast.error("Enter a valid email (Gmail, Hotmail, Outlook only).");
       setLoading(false);
       return;
@@ -70,6 +66,7 @@ const Login = () => {
       if (data.success) {
         localStorage.setItem("token", data.token);
         setToken(data.token);
+        toast.success("Successfully logged in!");
         navigate("/");
       } else {
         toast.error(data.message);
