@@ -11,7 +11,7 @@ const MyAppointments = () => {
 
   const [appointments, setAppointments] = useState([]);
   const [payment, setPayment] = useState("");
-  const [videoCallLinks, setVideoCallLinks] = useState({}); // Store video call links
+  const [videoCallLinks, setVideoCallLinks] = useState({});
 
   const months = [
     "Jan",
@@ -41,6 +41,7 @@ const MyAppointments = () => {
         headers: { token },
       });
       setAppointments(data.appointments ? data.appointments.reverse() : []);
+      toast.success("Appointments fetched successfully!");
     } catch (error) {
       console.log(error);
       toast.error("Failed to fetch appointments");
@@ -62,7 +63,7 @@ const MyAppointments = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error("Failed to cancel appointment");
     }
   };
 
@@ -85,10 +86,13 @@ const MyAppointments = () => {
           if (data.success) {
             navigate("/my-appointments");
             getUserAppointments();
+            toast.success("Payment successful!");
+          } else {
+            toast.error("Payment verification failed");
           }
         } catch (error) {
           console.log(error);
-          toast.error(error.message);
+          toast.error("Payment failed");
         }
       },
     };
@@ -110,7 +114,7 @@ const MyAppointments = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error("Razorpay payment initialization failed");
     }
   };
 
@@ -129,7 +133,7 @@ const MyAppointments = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error("Stripe payment failed");
     }
   };
 
@@ -154,12 +158,10 @@ const MyAppointments = () => {
       console.log("API Response:", data);
 
       if (data.success && data.callLink) {
-        // ✅ Checking success flag
         setVideoCallLinks((prev) => ({
           ...prev,
           [appointmentId]: data.callLink,
         }));
-        console.log("Video call link set successfully:", data.callLink);
         toast.success("Video call link generated!");
       } else {
         toast.error(data.message || "Failed to generate video call link");
