@@ -1,69 +1,106 @@
-import axios from 'axios'
-import React, { useContext, useState } from 'react'
-import { DoctorContext } from '../context/DoctorContext'
-import { AdminContext } from '../context/AdminContext'
-import { toast } from 'react-toastify'
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import { DoctorContext } from '../context/DoctorContext';
+import { AdminContext } from '../context/AdminContext';
+import { toast } from 'react-toastify';
+import { FaUserMd, FaUserShield } from 'react-icons/fa';
 
 const Login = () => {
+  const [role, setRole] = useState('Admin');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const [state, setState] = useState('Admin')
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const backendUrl = import.meta.env.VITE_BACKEND_URL
-
-  const { setDToken } = useContext(DoctorContext)
-  const { setAToken } = useContext(AdminContext)
+  const { setDToken } = useContext(DoctorContext);
+  const { setAToken } = useContext(AdminContext);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    if (!email || !password) return toast.error('Please fill in all fields.');
 
-    if (state === 'Admin') {
+    setLoading(true);
+    try {
+      const endpoint = role === 'Admin' ? '/api/admin/login' : '/api/doctor/login';
+      const { data } = await axios.post(`${backendUrl}${endpoint}`, { email, password });
 
-      const { data } = await axios.post(backendUrl + '/api/admin/login', { email, password })
       if (data.success) {
-        setAToken(data.token)
-        localStorage.setItem('aToken', data.token)
+        const tokenKey = role === 'Admin' ? 'aToken' : 'dToken';
+        const setToken = role === 'Admin' ? setAToken : setDToken;
+
+        setToken(data.token);
+        localStorage.setItem(tokenKey, data.token);
+        toast.success(`${role} logged in successfully!`);
       } else {
-        toast.error(data.message)
+        toast.error(data.message);
       }
-
-    } else {
-
-      const { data } = await axios.post(backendUrl + '/api/doctor/login', { email, password })
-      if (data.success) {
-        setDToken(data.token)
-        localStorage.setItem('dToken', data.token)
-      } else {
-        toast.error(data.message)
-      }
-
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Login failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
-
-  }
+  };
 
   return (
-    <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>
-      <div className='flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg'>
-        <p className='text-2xl font-semibold m-auto'><span className='text-primary'>{state}</span> Login</p>
-        <div className='w-full '>
-          <p>Email</p>
-          <input onChange={(e) => setEmail(e.target.value)} value={email} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="email" required />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <form
+        onSubmit={onSubmitHandler}
+        className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full max-w-md"
+      >
+        <div className="text-center mb-6">
+          {role === 'Admin' ? (
+            <FaUserShield className="text-primary text-4xl mx-auto" />
+          ) : (
+            <FaUserMd className="text-primary text-4xl mx-auto" />
+          )}
+          <h2 className="text-3xl font-semibold mt-2 text-gray-700 dark:text-gray-100">
+            {role} Login
+          </h2>
         </div>
-        <div className='w-full '>
-          <p>Password</p>
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
-        </div>
-        <button className='bg-primary text-white w-full py-2 rounded-md text-base'>Login</button>
-        {
-          state === 'Admin'
-            ? <p>Doctor Login? <span onClick={() => setState('Doctor')} className='text-primary underline cursor-pointer'>Click here</span></p>
-            : <p>Admin Login? <span onClick={() => setState('Admin')} className='text-primary underline cursor-pointer'>Click here</span></p>
-        }
-      </div>
-    </form>
-  )
-}
 
-export default Login
+        <div className="mb-4">
+          <label className="block text-gray-600 dark:text-gray-300 mb-1">Email</label>
+          <input
+            type="email"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:outline-none dark:bg-gray-700 dark:text-white"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-600 dark:text-gray-300 mb-1">Password</label>
+          <input
+            type="password"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:outline-none dark:bg-gray-700 dark:text-white"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-primary text-white py-3 rounded-lg text-lg font-medium transition hover:bg-opacity-90 disabled:opacity-50"
+          disabled={loading}
+        >
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+
+        <p className="text-center mt-4 text-gray-600 dark:text-gray-300">
+          {role === 'Admin' ? 'Doctor Login?' : 'Admin Login?'}
+          <span
+            onClick={() => setRole(role === 'Admin' ? 'Doctor' : 'Admin')}
+            className="text-primary cursor-pointer underline ml-1"
+          >
+            Click here
+          </span>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
