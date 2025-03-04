@@ -3,6 +3,9 @@ import axios from "axios";
 import Select from "react-select";
 import { Toaster, toast } from "react-hot-toast";
 import { motion } from "framer-motion";
+import { FaHeartbeat, FaStethoscope } from "react-icons/fa";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { ImSpinner8 } from "react-icons/im"; 
 
 const SYMPTOM_OPTIONS = [
   { value: "fever", label: "Fever" },
@@ -27,7 +30,7 @@ const SymptomChecker = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
-  const [healthTips, setHealthTips] = useState([]); // ✅ Store health tips
+  const [healthTips, setHealthTips] = useState([]);
 
   const handleSymptomChange = (selectedOptions) => {
     setSelectedSymptoms(selectedOptions.map((option) => option.value));
@@ -38,16 +41,13 @@ const SymptomChecker = () => {
       toast.error("Please select at least one symptom!");
       return;
     }
-
     setLoading(true);
     try {
       const { data } = await axios.post("http://localhost:5001/predict", {
         symptoms: selectedSymptoms,
       });
-
       setResult(data.predicted_disease);
-      setHealthTips(data.health_tips || []); // ✅ Store health tips
-
+      setHealthTips(data.health_tips || []);
       toast.success("Prediction successful!");
     } catch (error) {
       toast.error("Error fetching results.");
@@ -58,18 +58,24 @@ const SymptomChecker = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 to-indigo-300 p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6">
       <Toaster />
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-white shadow-xl rounded-3xl p-6 w-full max-w-md text-center"
+        className="bg-white shadow-lg rounded-3xl p-8 w-full max-w-lg text-center border border-gray-200"
       >
-        <h2 className="text-3xl font-bold text-indigo-700 mb-4">AI Symptom Checker</h2>
-        <p className="text-gray-700 mb-4 text-sm">Select your symptoms and get a disease prediction powered by AI.</p>
+        {/* Title Section */}
+        <div className="flex justify-center items-center mb-4">
+          <FaHeartbeat className="text-red-500 text-4xl mr-2" />
+          <h2 className="text-3xl font-extrabold text-gray-900">AI Symptom Checker</h2>
+        </div>
+        <p className="text-gray-600 text-sm mb-6">
+          Enter your symptoms and receive a possible diagnosis instantly.
+        </p>
 
-        {/* Dropdown for symptom selection */}
+        {/* Symptom Selection */}
         <Select
           options={SYMPTOM_OPTIONS}
           isMulti
@@ -77,34 +83,49 @@ const SymptomChecker = () => {
           className="mb-4 text-black"
           placeholder="Select symptoms..."
           isClearable
+          styles={{
+            control: (base) => ({
+              ...base,
+              padding: "6px",
+              fontSize: "16px",
+            }),
+          }}
         />
 
+        {/* Predict Button */}
         <button
-          className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500 transition duration-300 disabled:bg-gray-400"
+          className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition duration-300 font-semibold text-lg flex items-center justify-center gap-2"
           onClick={handlePredict}
           disabled={loading}
         >
           {loading ? (
-            <span className="animate-spin">🔄</span>
+            <>
+              <ImSpinner8 className="animate-spin text-lg" /> Checking...
+            </>
           ) : (
-            "Check Disease"
+            <>
+              <FaStethoscope /> Check Disease
+            </>
           )}
         </button>
 
-        {/* Result Section */}
+        {/* Diagnosis Result */}
         {result && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="mt-4 p-4 bg-green-100 border border-green-400 text-green-800 rounded-lg shadow-md"
+            className="mt-6 p-5 bg-green-100 border border-green-400 text-green-800 rounded-xl shadow-md"
           >
-            <h3 className="text-lg font-semibold">Diagnosis Result:</h3>
-            <p className="mt-2 text-base">{result}</p>
+            <div className="flex items-center justify-center">
+              <IoMdCheckmarkCircleOutline className="text-green-600 text-3xl" />
+              <h3 className="text-lg font-bold ml-2">Diagnosis Result</h3>
+            </div>
+            <p className="mt-2 text-md font-medium">{result}</p>
 
-            {/* Health Tips Section */}
+            {/* Health Tips */}
             {healthTips.length > 0 && (
-              <div className="mt-3 text-left">
+              <div className="mt-4 text-left">
                 <h4 className="text-md font-semibold text-green-700">Health Tips:</h4>
                 <ul className="list-disc list-inside mt-1 text-gray-700">
                   {healthTips.map((tip, index) => (
