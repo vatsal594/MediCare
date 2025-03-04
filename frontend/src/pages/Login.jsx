@@ -31,12 +31,16 @@ const Login = () => {
     setLoading(true);
 
     if (state === "Sign Up" && (name.length < 3 || !/^[A-Za-z]+$/.test(name))) {
-      toast.error("Name must be at least 3 characters and contain only letters.");
+      toast.error(
+        "Name must be at least 3 characters and contain only letters."
+      );
       setLoading(false);
       return;
     }
 
-    if (!/^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$/.test(email)) {
+    if (
+      !/^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$/.test(email)
+    ) {
       toast.error("Enter a valid email (Gmail, Hotmail, Outlook only).");
       setLoading(false);
       return;
@@ -79,10 +83,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-transparent">
+    <div className="min-h-screen flex items-start justify-center bg-transparent pt-1">
       <form
         onSubmit={onSubmitHandler}
-        className="bg-white dark:bg-gray-800 p-6 sm:p-8 shadow-lg rounded-2xl w-[350px] sm:w-[400px]"
+        className="bg-white dark:bg-gray-800 p-4 sm:p-5 shadow-lg rounded-xl w-[320px] sm:w-[360px] text-sm"
       >
         <h2 className="text-2xl font-semibold text-center text-gray-800 dark:text-white">
           {state === "Sign Up" ? "Create Account" : "Login"}
