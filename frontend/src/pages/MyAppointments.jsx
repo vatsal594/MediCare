@@ -277,26 +277,16 @@ const MyAppointments = () => {
                 </button>
               )}
 
-              {!item.cancelled &&
-                item.payment &&
-                !item.isCompleted &&
-                (videoCallLinks[item._id] ? (
-                  <a
-                    href={videoCallLinks[item._id]}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="sm:min-w-48 py-2 border rounded bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 text-center flex justify-center items-center"
-                  >
-                    Join Video Call
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => generateVideoCall(item._id)}
-                    className="sm:min-w-48 py-2 border rounded bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 text-center flex justify-center items-center"
-                  >
-                    Start Video Call
-                  </button>
-                ))}
+              {!item.cancelled && item.payment && !item.isCompleted && (
+                <a
+                  href={`/video-call/${item._id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sm:min-w-48 py-2 border rounded bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 text-center flex justify-center items-center"
+                >
+                  Start Video Call
+                </a>
+              )}
 
               {/* Request Refund Button */}
               {!item.cancelled && item.payment && !item.isCompleted && (

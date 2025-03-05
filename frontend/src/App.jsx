@@ -17,7 +17,7 @@ import SymptomChecker from "./pages/SymptomChecker"; // ✅ Added Import
 import RefundPage from "./pages/RefundPage";
 import HealthEducation from "./pages/HealthEducation"; // ✅ Import new page
 import Chatbot from "./components/Chatbot"; // ✅ Import Chatbot component
-
+import VideoCall from "./pages/VideoCall";
 const App = () => {
   return (
     <div className="mx-4 sm:mx-[10%]">
@@ -37,6 +37,8 @@ const App = () => {
         <Route path="/symptom-checker" element={<SymptomChecker />} />
         <Route path="/request-refund/:appointmentId" element={<RefundPage />} /> {/* ✅ Fixed this */}
         <Route path="/health-education" element={<HealthEducation />} />
+        <Route path="/video-call/:meetingId" element={<VideoCall />} />
+
       </Routes>
       <Chatbot /> 
       <Footer />
