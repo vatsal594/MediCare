@@ -158,4 +158,4 @@ Contributions are welcome! Feel free to open issues and submit pull requests.
 
 ## Contact
 
-For queries, reach out to [your-email@example.com](mailto:your-email@example.com).
+For queries, reach out to [vatsalsavani594@gmail.com](mailto:your-email@example.com).
