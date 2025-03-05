@@ -104,8 +104,8 @@ MediCare is a comprehensive doctor appointment booking system designed to stream
 1. **Clone the repository**
 
 ```sh
- git clone https://github.com/your-repo/mediCare.git
- cd mediCare
+ git clone https://github.com/vatsal594/MediCare.git
+ cd MediCare
 ```
 
 2. **Set up environment variables**
