@@ -142,6 +142,11 @@ const RefundPage = () => {
             <option value="Appointment canceled by doctor">
               Appointment canceled by doctor
             </option>
+            <option value="Doctor unavailable">Doctor unavailable</option>
+            <option value="Technical issues during appointment">
+              Technical issues during appointment
+            </option>
+            <option value="Scheduling conflict">Scheduling conflict</option>
             <option value="Other">Other</option>
           </select>
         </div>
