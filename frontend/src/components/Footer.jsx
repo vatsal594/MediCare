@@ -12,10 +12,10 @@ const Footer = () => {
           <div className="flex flex-col sm:items-start items-center">
             <img className="mb-5 w-40" src={assets.logo} alt="MediCare Logo" />
             <p className="w-full md:w-2/3 text-gray-600 leading-6 text-justify">
-              At MediCare, we connect you with trusted doctors to make healthcare
-              easier and more accessible. With features like AI-powered symptom
-              checkers and health risk predictions, we aim to provide you with the
-              best care right at your fingertips.
+              At MediCare, we connect you with trusted doctors to make
+              healthcare easier and more accessible. With features like
+              AI-powered symptom checkers and health risk predictions, we aim to
+              provide you with the best care right at your fingertips.
             </p>
           </div>
 
@@ -43,25 +43,47 @@ const Footer = () => {
           <div className="flex flex-col items-center sm:items-start">
             <p className="text-xl font-semibold mb-5">GET IN TOUCH</p>
             <ul className="flex flex-col gap-3 text-gray-600">
-              <li className="hover:text-indigo-600 cursor-pointer">+91 8329351893</li>
-              <li className="hover:text-indigo-600 cursor-pointer">+91 9699601893</li>
-              <li className="hover:text-indigo-600 cursor-pointer">vatsalsavani594@gmail.com</li>
+              <li className="hover:text-indigo-600 cursor-pointer">
+                +91 8329351893
+              </li>
+              <li className="hover:text-indigo-600 cursor-pointer">
+                +91 9699601893
+              </li>
+              <li className="hover:text-indigo-600 cursor-pointer">
+                vatsalsavani594@gmail.com
+              </li>
             </ul>
           </div>
         </div>
 
         {/* Social Media Links */}
         <div className="flex justify-center gap-6 my-6">
-          <a href="https://facebook.com" className="text-gray-600 hover:text-indigo-600" aria-label="Facebook">
+          <a
+            href="https://facebook.com"
+            className="text-gray-600 hover:text-indigo-600"
+            aria-label="Facebook"
+          >
             <FaFacebook size={20} />
           </a>
-          <a href="https://www.instagram.com/vatssal.savani_/" className="text-gray-600 hover:text-indigo-600" aria-label="Instagram">
+          <a
+            href="https://www.instagram.com/vatssal.savani_/"
+            className="text-gray-600 hover:text-indigo-600"
+            aria-label="Instagram"
+          >
             <FaInstagram size={20} />
           </a>
-          <a href="https://twitter.com" className="text-gray-600 hover:text-indigo-600" aria-label="Twitter">
+          <a
+            href="https://twitter.com"
+            className="text-gray-600 hover:text-indigo-600"
+            aria-label="Twitter"
+          >
             <FaTwitter size={20} />
           </a>
-          <a href="https://linkedin.com" className="text-gray-600 hover:text-indigo-600" aria-label="LinkedIn">
+          <a
+            href="https://www.linkedin.com/in/vatsal-savani-b296ab318/?originalSubdomain=in"
+            className="text-gray-600 hover:text-indigo-600"
+            aria-label="LinkedIn"
+          >
             <FaLinkedin size={20} />
           </a>
         </div>
