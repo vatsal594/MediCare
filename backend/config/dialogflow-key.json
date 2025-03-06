@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "medicare-chatbot",
+  "private_key_id": "ab1430a126cd166374453969a499ef45797bfdea",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDJOPeORfhk8oMI\nHdu3R6rZPjNnWDwIDf/0zRM5xaqhw9w8mFCi6bQ2/1UWLaaaqMMhtIMDq2JNvq72\nWHUn9moVbuJHVHcU/R+lsMihU9K1p1rYpraQDpzpHiGyaEso1v0/uJsc7hZoi02V\nCtG1ZGMrrRg68OFTOwj1ga0Vwbm0nP8YfBVQQWawfAYdRs7/DM8mYbQb/zDPjHrK\nUcXTFOAzNfYjghqzWfv3R64DcFsEUhvpsdvCDBQ8AphXXbM4bAwKV6rfIG/e3wXw\nmUhMksAbZKHDjeC+4S5UeJ5QjpzP0ivKoE+2R+kMG6ITxsX0svC560VcB8065wjV\nMG5voL+ZAgMBAAECggEAC3TGCcBlQ/OkQiU91rfd1XOuuYa5SqKBaagptnOEI3GW\na4/zoOxtT83gEKmVf3ipCcidLOuBzUTt8SVYH85Ue9casU6Kkq28/4UkTXFx4Njs\nv/W94k9ZEtMEWB2LKegTj9OSzf+mhvOalygZu5oOvo3V5oUp6IzHFczF1FdGaC66\n09WJ/0uECfkUX1UNFGJk6GaORRogVYxodtW7tLj+lTy0w9Xu1RsMI8Po1o61AlN0\nFVrKaAxgIt8yfrn1kX1Vff/D03l9sf/vUvWJlKu6Ngof6B4US2nG+qCLgXtaaJeQ\nLGbdg7clJA6MREhIGfQ1zMOjfXvHwBxojP3/avExgQKBgQD+gSfTn4gXmMvGHbx+\n9+fU80KuQ3BOixa9gvt6PJGJVZJPEsSL4YLZ3g+YAZ4fUnf8DFWg679mubz8027i\nL8SoM27iSff1lTYATuDlKpyHuUxB1Px+Bj1jD7fx97VOXUghNVsLBhLQCjcYGdt4\nyVxrbporqOop8TgkP01Vc69eUwKBgQDKZ6knO1LEndBrHMDJ5EV+Edc1yX3TI/hK\ncu62A08UBevbuJ+8Ky39u+e+IEK6vuI/ULQRXbz3jNsx1TEL94yQgnWcq0wvSkMO\n3710b4oOi/O9hxObl9bJNb7vZDvy155MLWCw3HUJ98J8Y6bUQt0fyxu7NuXzfMYC\nrZa4NMP04wKBgQDie2tGvvQsE5RbdMD2uIQ9lFElpOv/aXVOJo7GI7pb3aO67Heu\nB3wbh6qW2fGt7ATMbumQr9p/fxC4aSuG6311NXgatjqL+EG7Gna2WSo8+d/rwa8E\nM2dTjXxjPs3As/BpZQLlF32MV1rZ/sC5h2/QRve5nLLtqjUMxKx8O9u28wKBgDhH\nsKo+/Zm8RAq0mQrKVWRjs5K6Lyl5k/2njabArsljiBy1bn0VCJnIGP0t3UAt+Z0f\nZKJ7jSLMYNqvbA7my4gXLnrcyrdPj+vf3L82kI3Q7nphx9r40nlqX2gTV/QDbnnC\nGGO1OToHUWXjE61r1i6T/GcHMdONe0WdXQ5lZaN/AoGAJLjywu42OUylyb97uRd3\nsc5f2gIsu6DqPeSdAX7AMKzg6t7doRf+oh/92Q6zC2tGUg7qmXth88gVoODBdhTK\nbKm7UoIb5DnO9Y/Dh3PnoxEKToCId9ejPmYxWMisHyosRiiPBcSYTVJmXdSj8X1C\nmocYphBP3AsyE7/qc15Q9Wg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow-agent@medicare-chatbot.iam.gserviceaccount.com",
+  "client_id": "114077213275937103844",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow-agent%40medicare-chatbot.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

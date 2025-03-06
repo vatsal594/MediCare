@@ -1,0 +1,29 @@
+/* Import the Google font before Tailwind CSS */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+* {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Custom class example */
+.active hr {
+    @apply block;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 740px) {
+    .active p {
+        @apply text-white bg-primary; /* Apply Tailwind utilities */
+    }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    @apply hidden;
+}
