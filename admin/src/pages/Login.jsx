@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import { FaUserMd, FaUserShield, FaEye, FaEyeSlash } from "react-icons/fa";
 
-// Initialize Toastify
-toast.configure();
+
 
 const Login = () => {
   const [role, setRole] = useState("Admin");
