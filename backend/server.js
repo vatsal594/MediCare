@@ -26,14 +26,6 @@ connectCloudinary();
 app.use(express.json());
 app.use(cors());
 
-// CORS Configuration: Only allow frontend URL to interact with backend
-const corsOptions = {
-  origin: "https://frontend-iota-beige-59.vercel.app/", // Replace with your frontend URL
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type,Authorization",
-};
-app.use(cors(corsOptions));
-
 // Dialogflow setup
 const KEY_PATH = path.join(
   __dirname,
