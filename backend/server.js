@@ -26,9 +26,19 @@ connectCloudinary();
 app.use(express.json());
 app.use(cors());
 
-// Dialogflow setup
-const KEY_PATH = path.join(__dirname, process.env.GOOGLE_APPLICATION_CREDENTIALS);
+// CORS Configuration: Only allow frontend URL to interact with backend
+const corsOptions = {
+  origin: "https://frontend-iota-beige-59.vercel.app/", // Replace with your frontend URL
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+};
+app.use(cors(corsOptions));
 
+// Dialogflow setup
+const KEY_PATH = path.join(
+  __dirname,
+  process.env.GOOGLE_APPLICATION_CREDENTIALS
+);
 
 if (!fs.existsSync(KEY_PATH)) {
   console.error("❌ Dialogflow key file is missing!");
@@ -40,7 +50,6 @@ const sessionClient = new dialogflow.SessionsClient({
 });
 
 const projectId = process.env.GOOGLE_PROJECT_ID;
-
 
 // API Endpoint for Chatbot
 app.post("/api/chatbot", async (req, res) => {
