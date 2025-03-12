@@ -23,7 +23,8 @@ const Navbar = () => {
     { path: "/about", label: "ABOUT" },
     { path: "/contact", label: "CONTACT" },
     { path: "/symptom-checker", label: "SYMPTOM CHECKER" },
-    { path: "/health-education", label: "HEALTH EDUCATION" } // New link added
+    { path: "/health-education", label: "HEALTH EDUCATION" }, // New link added
+    { path: "http://localhost:5175/", label: "ADMIN LOGIN", target: "_blank" }, // Admin Login link opens in a new tab
   ];
 
   return (
@@ -37,10 +38,11 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className="md:flex items-start gap-5 font-medium hidden">
-        {menuItems.map(({ path, label }, index) => (
+        {menuItems.map(({ path, label, target }, index) => (
           <NavLink
             key={index}
             to={path}
+            target={target}
             className={({ isActive }) =>
               clsx(
                 "py-1",
@@ -57,10 +59,20 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         {token && userData ? (
           <div className="flex items-center gap-4">
-            <p className="text-gray-700 font-medium">Welcome, {userData.name}!</p>
+            <p className="text-gray-700 font-medium">
+              Welcome, {userData.name}!
+            </p>
             <div className="flex items-center gap-2 cursor-pointer group relative">
-              <img className="w-8 rounded-full" src={userData.image} alt="User" />
-              <img className="w-2.5" src={assets.dropdown_icon} alt="Dropdown" />
+              <img
+                className="w-8 rounded-full"
+                src={userData.image}
+                alt="User"
+              />
+              <img
+                className="w-2.5"
+                src={assets.dropdown_icon}
+                alt="Dropdown"
+              />
               <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
                 <div className="min-w-48 bg-gray-50 rounded flex flex-col gap-4 p-4">
                   <p
@@ -75,7 +87,10 @@ const Navbar = () => {
                   >
                     My Appointments
                   </p>
-                  <p onClick={logout} className="hover:text-black cursor-pointer">
+                  <p
+                    onClick={logout}
+                    className="hover:text-black cursor-pointer"
+                  >
                     Logout
                   </p>
                 </div>
