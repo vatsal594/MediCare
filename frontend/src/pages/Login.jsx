@@ -14,6 +14,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [animate, setAnimate] = useState(false); // For triggering animation
 
   const navigate = useNavigate();
   const { backendUrl, token, setToken } = useContext(AppContext);
@@ -25,6 +26,10 @@ const Login = () => {
   useEffect(() => {
     if (token) navigate("/");
   }, [token]);
+
+  useEffect(() => {
+    setAnimate(true); // Trigger the animation when the component is mounted
+  }, []);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -83,10 +88,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-transparent pt-1">
+    <div
+      className="min-h-screen flex items-start justify-center bg-cover bg-center pt-1"
+      style={{
+        backgroundImage: `url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+        transition: "all 0.5s ease-in-out", // Add a fade-in transition to the background
+      }}
+    >
       <form
         onSubmit={onSubmitHandler}
-        className="bg-white dark:bg-gray-800 p-4 sm:p-5 shadow-lg rounded-xl w-[320px] sm:w-[360px] text-sm"
+        className={`bg-white dark:bg-gray-800 p-4 sm:p-5 shadow-lg rounded-xl w-[320px] sm:w-[360px] text-sm transition-transform duration-700 ${
+          animate ? "transform scale-100 opacity-100" : "transform scale-90 opacity-0"
+        }`}
+        style={{ transition: "all 0.5s ease-in-out" }}
       >
         <h2 className="text-2xl font-semibold text-center text-gray-800 dark:text-white">
           {state === "Sign Up" ? "Create Account" : "Login"}

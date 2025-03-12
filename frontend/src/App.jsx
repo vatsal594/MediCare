@@ -18,6 +18,7 @@ import RefundPage from "./pages/RefundPage";
 import HealthEducation from "./pages/HealthEducation"; // ✅ Import new page
 import Chatbot from "./components/Chatbot"; // ✅ Import Chatbot component
 import VideoCall from "./pages/VideoCall";
+import './index.css';
 const App = () => {
   return (
     <div className="mx-4 sm:mx-[10%]">
