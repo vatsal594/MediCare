@@ -89,124 +89,106 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen flex items-start justify-center bg-cover bg-center pt-1"
-      style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
-        transition: "all 0.5s ease-in-out", // Add a fade-in transition to the background
-      }}
-    >
-      <form
-        onSubmit={onSubmitHandler}
-        className={`bg-white dark:bg-gray-800 p-4 sm:p-5 shadow-lg rounded-xl w-[320px] sm:w-[360px] text-sm transition-transform duration-700 ${
-          animate ? "transform scale-100 opacity-100" : "transform scale-90 opacity-0"
-        }`}
-        style={{ transition: "all 0.5s ease-in-out" }}
-      >
-        <h2 className="text-2xl font-semibold text-center text-gray-800 dark:text-white">
-          {state === "Sign Up" ? "Create Account" : "Login"}
-        </h2>
-        <p className="text-gray-500 text-center mb-4">
-          {state === "Sign Up"
-            ? "Sign up to book an appointment"
-            : "Log in to continue"}
-        </p>
+  className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-500 pt-5"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90b3wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+    backgroundSize: 'cover',
+  }}
+>
+  <form
+    onSubmit={onSubmitHandler}
+    className={`bg-white p-8 shadow-xl rounded-2xl w-[350px] sm:w-[400px] text-sm`}
+    style={{
+      backgroundColor: "rgba(255, 255, 255, 0.85)",
+      transition: "all 0.3s ease-in-out",
+    }}
+  >
+    <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">{state === "Sign Up" ? "Create Account" : "Login"}</h2>
+    <p className="text-gray-600 text-center mb-6">{state === "Sign Up" ? "Sign up to book an appointment" : "Log in to continue"}</p>
 
-        {state === "Sign Up" && (
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
-              Full Name
-            </label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              type="text"
-              autoFocus
-              required
-            />
-          </div>
-        )}
+    {state === "Sign Up" && (
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">Full Name</label>
+        <input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600"
+          type="text"
+          autoFocus
+          required
+        />
+      </div>
+    )}
 
-        <div className="mb-3">
-          <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
-            Email
-          </label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            type="email"
-            required
-          />
-        </div>
-
-        <div className="mb-3 relative">
-          <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
-            Password
-          </label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white pr-10"
-            type={showPassword ? "text" : "password"}
-            required
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="absolute right-3 top-9 text-gray-500 dark:text-gray-300"
-          >
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-        </div>
-
-        {state === "Sign Up" && (
-          <div className="mb-3 relative">
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
-              Confirm Password
-            </label>
-            <input
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              value={confirmPassword}
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white pr-10"
-              type={showConfirmPassword ? "text" : "password"}
-              required
-            />
-            <button
-              type="button"
-              onClick={toggleConfirmPasswordVisibility}
-              className="absolute right-3 top-9 text-gray-500 dark:text-gray-300"
-            >
-              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          className="w-full py-2 mt-3 rounded-lg bg-blue-600 text-white text-lg font-medium transition hover:bg-blue-700"
-          disabled={loading}
-        >
-          {loading
-            ? "Processing..."
-            : state === "Sign Up"
-            ? "Create Account"
-            : "Login"}
-        </button>
-
-        <p className="text-center mt-4 text-sm text-gray-600 dark:text-gray-300">
-          {state === "Sign Up"
-            ? "Already have an account?"
-            : "Create a new account?"}
-          <span
-            onClick={() => setState(state === "Sign Up" ? "Login" : "Sign Up")}
-            className="text-blue-600 cursor-pointer underline ml-1"
-          >
-            {state === "Sign Up" ? "Login here" : "Sign up"}
-          </span>
-        </p>
-      </form>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">Email</label>
+      <input
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600"
+        type="email"
+        required
+      />
     </div>
+
+    <div className="mb-4 relative">
+      <label className="block text-sm font-medium text-gray-700">Password</label>
+      <input
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 pr-10"
+        type={showPassword ? "text" : "password"}
+        required
+      />
+      <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        className="absolute right-3 top-9 text-gray-500"
+      >
+        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+      </button>
+    </div>
+
+    {state === "Sign Up" && (
+      <div className="mb-4 relative">
+        <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+        <input
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 pr-10"
+          type={showConfirmPassword ? "text" : "password"}
+          required
+        />
+        <button
+          type="button"
+          onClick={toggleConfirmPasswordVisibility}
+          className="absolute right-3 top-9 text-gray-500"
+        >
+          {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+      </button>
+      </div>
+    )}
+
+    <button
+      type="submit"
+      className="w-full py-3 mt-4 rounded-xl bg-purple-600 text-white text-lg font-medium transition-all hover:bg-purple-700"
+      disabled={loading}
+    >
+      {loading ? "Processing..." : state === "Sign Up" ? "Create Account" : "Login"}
+    </button>
+
+    <p className="text-center mt-6 text-sm text-gray-600">
+      {state === "Sign Up" ? "Already have an account?" : "Create a new account?"}
+      <span
+        onClick={() => setState(state === "Sign Up" ? "Login" : "Sign Up")}
+        className="text-purple-600 cursor-pointer underline ml-1"
+      >
+        {state === "Sign Up" ? "Login here" : "Sign up"}
+      </span>
+    </p>
+  </form>
+</div>
+
   );
 };
 
