@@ -27,7 +27,7 @@ const Navbar = () => {
       { path: "/contact", label: "CONTACT" },
       { path: "/symptom-checker", label: "SYMPTOM CHECKER" },
       { path: "/health-education", label: "HEALTH EDUCATION" },
-      { path: "http://localhost:5175/", label: "ADMIN LOGIN", target: "_blank" },
+      { path: "http://localhost:5174/", label: "ADMIN LOGIN", target: "_blank" },
     ],
     []
   );
